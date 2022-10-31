@@ -19,38 +19,21 @@ const DisplayMixologists = () => {
 
     return (
         <div>
-            <div>
-                {
-                    mixologists.map((item) => {
-                        let name = <React.Fragment key={item.id}>
-                            <h1>{item.name}</h1>
+            {
+                mixologists.map((item) => {
+                    let name = <React.Fragment key={item.id}>
+                        <h1>{item.name}</h1>
+                    </React.Fragment>
+                    let drinksList = item.drinks.map(drink => {
+                        let drinksInfo = <React.Fragment key={drink.id}>
+                            <h3>{drink.name}</h3>
+                            <p>{drink.ingredients}</p>
                         </React.Fragment>
-                        let drinksList = item.drinks.map(drink => {
-                            let drinksInfo = <React.Fragment key={drink.id}>
-                                <h3>{drink.name}</h3>
-                                <p>{drink.ingredients}</p>
-                            </React.Fragment>
-                            return drinksInfo
-
-                        })
-                        return [name, drinksList]
-                    }
-                    )}
-            </div>
-            <div>
-                {
-                    mixologists.map((item) => {
-                        let drinks = item.drinks
-                        return drinks.map((drink) => {
-                            let drinksInfo = <React.Fragment key={drink.id}>
-                                <h3>{drink.name}</h3>
-                                <p>{drink.ingredients}</p>
-                            </React.Fragment>
-                            return drinksInfo
-                        })
+                        return drinksInfo
                     })
+                    return [name, drinksList]
                 }
-            </div>
+                )}
         </div>
     )
 
