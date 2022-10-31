@@ -3,32 +3,19 @@ import axios from "axios";
 
 const DisplayMixologists = () => {
     const [mixologists, setMixologists] = useState([]);
-    //const [drinks, setDrinks] = useState([]);
 
     useEffect(() => {
         axios
             .get('http://localhost:3000/api/v1/mixologists/')
             .then((res) => {
-                //console.log(res.data)
-
                 const mixologist = res.data
                 setMixologists(mixologist)
-
-                // const drinks = mixologist.drinks
-                // setDrinks(drinks)
-
-                // res.data.map(mix => { mix["drinks"].map(drink => drink["name"]) })
-
             })
             .catch((err) => console.log(err));
     }, []);
 
     useEffect(() => {
     }, [mixologists])
-
-    // useEffect(() => {
-
-    // }, [drinks])
 
     return (
         <div>
@@ -38,7 +25,15 @@ const DisplayMixologists = () => {
                         let name = <React.Fragment key={item.id}>
                             <h1>{item.name}</h1>
                         </React.Fragment>
-                        return name
+                        let drinksList = item.drinks.map(drink => {
+                            let drinksInfo = <React.Fragment key={drink.id}>
+                                <h3>{drink.name}</h3>
+                                <p>{drink.ingredients}</p>
+                            </React.Fragment>
+                            return drinksInfo
+
+                        })
+                        return [name, drinksList]
                     }
                     )}
             </div>
